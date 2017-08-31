@@ -1,5 +1,9 @@
 -- Author: Taylor Walenczyk
 -- Last edit: 8/29
+module Useful
+( getPrimesLessThan
+, factorizeWith
+) where
 
 -- Gets all primes less than a give number
 getPrimesLessThan :: (Integral a) =>  a -> [a]
