@@ -1,7 +1,7 @@
 -- Author: Taylor Walenczyk
 -- Last Edit: 8/29/2017
 -- Original Solved: 8/29/2017
--- Solution Improved: ~
+-- Solution Improved: 8/29/2017
 
 import Useful
 import System.IO
