@@ -1,17 +1,15 @@
 -- Author: Taylor Walenczyk
--- Last edit: 8/31
-module Useful
-( getPrimesLessThan
-, factorizeWith
-) where
+-- Last Edit: 8/31/2017
+-- Originally Solved: 8/31/2017
+-- Solution Improved: ~
+-- Computation time: 24s
 
--- Gets all primes less than a give number
-getPrimesLessThan :: (Integral a) =>  a -> [a]
-getPrimesLessThan x = [ x2 | x2 <- [1..(x-1)], isPrime x2]
+import System.IO
 
--- Factorizes a number using a list of primes
-factorizeWith :: (Integral a) => a -> [a] -> [a]
-factorizeWith x y = [ x2 | x2 <- y, x `mod` x2 == 0]
+main = do
+    putStrLn "Welcome! This will compute the 10001st prime number for you. Hold on tight!"
+    putStrLn "..."
+    print (last (take 10001(filter isPrime [2..])))
 
 -- Determines whether or not a number is prime
 isPrime :: (Integral a) => a -> Bool
