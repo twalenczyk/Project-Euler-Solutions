@@ -4,9 +4,6 @@
 -- Solution Improved: ~
 -- Computation time: 24
 
--- TODO
-    -- Create a list of 3-tuples containing pythagorean triplets
-
 -- get the values for a b c
 trianglesSumTo1000 = [ (a, b, c) | a <- [1..500], b <- [1..500], c <- [1..500], a < b, b < c, a + b + c == 1000]
 

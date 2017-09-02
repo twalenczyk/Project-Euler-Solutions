@@ -11,6 +11,4 @@ main = do
     putStrLn "What number would you like to factorize?"
     number <- getLine
     putStrLn ("You said: " ++ number)
-    let x = Useful.getPrimesLessThan (read number :: Int)
-    let y = Useful.factorizeWith (read number :: Int) x
-    print y
+    print (last (Useful.primeFactors (read number :: Integer)))

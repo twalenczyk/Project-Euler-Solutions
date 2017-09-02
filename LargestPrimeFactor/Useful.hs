@@ -1,9 +1,26 @@
 -- Author: Taylor Walenczyk
 -- Last edit: 8/31
 module Useful
-( getPrimesLessThan
-, factorizeWith
+( primeFactors
 ) where
+
+-- NOTE Beginning here is the revised solution
+
+-- Source: https://wiki.haskell.org/Euler_problems/1_to_10#Problem_10
+-- A function that returns a list of prime numbers
+-- (null . tail . primeFactors) effectively produces a predicate to determine whether or not the primes are supposed to be used
+primes = 2 : filter (null . tail . primeFactors) [3,5..]
+
+-- A function that finds the prime factors of a given number
+primeFactors n = factor n primes
+    where
+        factor n (p:ps)
+            | p*p > n = [n] -- p isn't a factor
+            | n `mod` p == 0 = p : factor (n `div` p) (p:ps) -- joins factor p with all of its factors
+            | otherwise =  factor n ps -- p isn't a factor, continue with the rest of the list
+
+
+-- NOTE Below here contains methods used in the original solution
 
 -- Gets all primes less than a give number
 getPrimesLessThan :: (Integral a) =>  a -> [a]
