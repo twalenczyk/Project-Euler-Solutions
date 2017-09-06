@@ -18,7 +18,6 @@ main = do
     print (sum (takeWhile (<2000000) primes))
 
 
-
 -- A function that returns a list of prime numbers
 -- (null . tail . primeFactors) effectively produces a predicate to determine whether or not the primes are supposed to be used
 primes = 2 : filter (null . tail . primeFactors) [3,5..]
