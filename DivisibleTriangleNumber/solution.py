@@ -16,7 +16,10 @@ def is_prime(n):
         return True
     if n in non_prime_memo:
         return False
-    for i in range(2, int(math.ceil(math.sqrt(n)))+2):
+    if n % 2 == 0:
+        non_prime_memo.add(n)
+        return False
+    for i in range(3, int(math.ceil(math.sqrt(n)))+2, 2):
         if n % i == 0:
             non_prime_memo.add(n)
             return False
@@ -25,8 +28,10 @@ def is_prime(n):
 
 # Yields prime numbers less than the sqrt of n
 # TODO memoize
-def prime_nums(n):
-    for cand in range(2, int(math.ceil(math.sqrt(n)))+2):
+def prime_nums(n, init=[2]):
+    for cand in init:
+        yield cand
+    for cand in range(init[-1]+1, int(n/2)+1, 2):
         if is_prime(cand):
             yield cand
 
@@ -34,7 +39,7 @@ def prime_nums(n):
 def prime_factorization(n):
     cur = n
     ret = {}
-    for i in prime_nums(n):
+    for i in prime_nums(n, init=list(prime_memo)):
         is_div = cur % i == 0
         if is_div:
             ret[i] = 0
@@ -53,21 +58,18 @@ def num_divisors(n):
         nd *= (exp+1)
     return nd
 
-# Yields r many triangular numbers
-def tri_nums(r):
-    am = 0
-    for i in range(1,r+1):
-        am += i
-        yield am
-
 # Returns the first triangular number with n divisors
 def find_tri_num(n):
     #for tri in tri_nums(10**4):
-    for i in range(1, 10**5+1):
-        tri = i*(i+1)/2
+    #track = {}
+    for i in range(int(10**5/2), 10**5+1):
+        tri = int(i*(i+1)/2)
         divs = num_divisors(tri)
+        #track[tri] = divs
         if divs > n:
+            #print(pprint_dict(track))
             return tri
+    #print(pprint_dict(track))
     return None
 
 if __name__ == '__main__':
@@ -75,7 +77,6 @@ if __name__ == '__main__':
     divisors = int(input())
     st = time.time()
     ans = find_tri_num(divisors)
-    #ans = prime_factorization(313112800)
     ft = time.time()-st
     print('The first triangular number with more than {0} divisors is {1}'.format(divisors, ans))
     print('Solution computed in {0} seconds'.format(ft))
